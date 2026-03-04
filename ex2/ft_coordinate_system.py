@@ -8,7 +8,13 @@ def parse_coordinates(string: str) -> tuple[int, int, int]:
 
     for coordinate in string.split(","):
         parsed_coordinates.append(int(coordinate))
-    return tuple(parsed_coordinates)
+    if len(parsed_coordinates) < 3:
+        raise ValueError("Invalid coordinate string")
+    return (
+        parsed_coordinates[0],
+        parsed_coordinates[1],
+        parsed_coordinates[2]
+    )
 
 
 def vec3_dist(v1: tuple[int, int, int], v2: tuple[int, int, int]):

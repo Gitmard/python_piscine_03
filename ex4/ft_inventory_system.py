@@ -10,7 +10,7 @@ class Inventory:
             "abundant": {}
         }
 
-    def get_items(self):
+    def get_items(self) -> dict[str, dict[str, int]]:
         # Return a copy of the items dict
         return dict(self.__items)
 
@@ -143,6 +143,8 @@ class Inventory:
     def get_item_names_by_amount(self, amount: int) -> list[str]:
         items: list[str] = []
         category = self.get_category_for_amount(amount)
+        if category is None:
+            raise ValueError(f"Error: invalid amout {amount}")
         category_dict = self.get_items().get(category)
         assert category_dict is not None
         for item, item_amount in category_dict.items():
@@ -152,7 +154,9 @@ class Inventory:
 
     def sample_lookup(self, item: str) -> bool:
         for category in self.get_items().keys():
-            for key_item in self.get_items().get(category).keys():
+            category_dict = self.get_items().get(category)
+            assert category_dict is not None
+            for key_item in category_dict.keys():
                 if key_item == item:
                     return True
         return False
@@ -196,13 +200,16 @@ class InventoryManager:
         print("\n=== Inventory Statistics ===")
         most_abundant = self.get_inventory().get_most_abundant()
         most_scarse = self.get_inventory().get_most_scarse()
+        assert most_abundant is not None and most_scarse is not None
         print(f"Most abundant: {most_abundant[0]} ({most_abundant[1]} items)")
         print(f"Least abundant: {most_scarse[0]} ({most_scarse[1]} items)")
 
     def print_inventory_categories(self):
         print("\n=== Item Categories ===")
         for category in self.get_inventory().get_items().keys():
-            if len(self.get_inventory().get_items().get(category)):
+            category_dict = self.get_inventory().get_items().get(category)
+            assert category_dict is not None
+            if len(category_dict):
                 print(
                     f"{category.capitalize()}:",
                     f"{self.get_inventory().get_items().get(category)}"

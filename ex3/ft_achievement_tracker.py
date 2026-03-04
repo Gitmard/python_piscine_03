@@ -39,7 +39,7 @@ class AchievementsManager:
 
     def __init__(
         self,
-        players: list[Player] = None,
+        players: list[Player] | None = None,
     ):
         if players is None:
             players = []
@@ -93,8 +93,8 @@ class AchievementsManager:
         return differentiated_achievements
 
     def get_rare_achievements(self) -> set[str]:
-        found_achievements = set()
-        rare_achievements = set()
+        found_achievements: set[str] = set()
+        rare_achievements: set[str] = set()
         for player in self.get_players():
             for achievement in player.get_achievements():
                 if achievement not in found_achievements:
