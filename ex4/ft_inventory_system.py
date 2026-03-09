@@ -3,7 +3,7 @@
 class Inventory:
     __items: dict[str, dict[str, int]]
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.__items = {
             "scarse": {},
             "moderate": {},
@@ -165,13 +165,13 @@ class Inventory:
 class InventoryManager:
     __inventory: Inventory
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.__inventory = Inventory()
 
     def get_inventory(self) -> Inventory:
         return self.__inventory
 
-    def print_gobal_inventory_metrics(self):
+    def print_gobal_inventory_metrics(self) -> None:
         total_amount = 0
         for amount in self.get_inventory().get_items_flat().values():
             total_amount += amount
@@ -184,7 +184,7 @@ class InventoryManager:
             f"{len(self.get_inventory().get_unique_items())}"
         )
 
-    def print_current_inventory(self):
+    def print_current_inventory(self) -> None:
         print("\n=== Current Inventory ===")
         items_flat = self.__inventory.get_items_flat()
         items_total = 0
@@ -196,7 +196,7 @@ class InventoryManager:
                 f"({(amount * 100 / items_total):.1f}%)"
             )
 
-    def print_inventory_statistics(self):
+    def print_inventory_statistics(self) -> None:
         print("\n=== Inventory Statistics ===")
         most_abundant = self.get_inventory().get_most_abundant()
         most_scarse = self.get_inventory().get_most_scarse()
@@ -204,7 +204,7 @@ class InventoryManager:
         print(f"Most abundant: {most_abundant[0]} ({most_abundant[1]} items)")
         print(f"Least abundant: {most_scarse[0]} ({most_scarse[1]} items)")
 
-    def print_inventory_categories(self):
+    def print_inventory_categories(self) -> None:
         print("\n=== Item Categories ===")
         for category in self.get_inventory().get_items().keys():
             category_dict = self.get_inventory().get_items().get(category)
@@ -215,7 +215,7 @@ class InventoryManager:
                     f"{self.get_inventory().get_items().get(category)}"
                 )
 
-    def print_management_suggestions(self):
+    def print_management_suggestions(self) -> None:
         print("\n=== Management Suggestions ===")
         i = 0
         items_list = self.get_inventory().get_item_names_by_amount(1)
@@ -228,7 +228,7 @@ class InventoryManager:
             i += 1
         print(f"Restock needed: {items_list_str}")
 
-    def print_dictionary_properties_demo(self):
+    def print_dictionary_properties_demo(self) -> None:
         print("\n=== Dictionary Properties Demo ===")
         dictionnary_keys = self.get_inventory().get_items_flat().keys()
         dictionnary_keys_len = len(dictionnary_keys)

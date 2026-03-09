@@ -3,14 +3,14 @@
 import sys
 
 
-def avg(lst: list[int]):
+def avg(lst: list[int]) -> float:
     total = 0
     for score in lst:
         total += score
     return total / len(lst)
 
 
-def main():
+def main() -> None:
     print("=== Player Score Analytics ===")
     if len(sys.argv) <= 1:
         print(

@@ -17,7 +17,7 @@ def parse_coordinates(string: str) -> tuple[int, int, int]:
     )
 
 
-def vec3_dist(v1: tuple[int, int, int], v2: tuple[int, int, int]):
+def vec3_dist(v1: tuple[int, int, int], v2: tuple[int, int, int]) -> float:
     (x1, y1, z1) = v1
     (x2, y2, z2) = v2
 
@@ -28,11 +28,11 @@ def vec3_dist(v1: tuple[int, int, int], v2: tuple[int, int, int]):
     )
 
 
-def ft_round(n: float):
+def ft_round(n: float) -> float:
     return int(n * 100) / 100
 
 
-def main():
+def main() -> None:
     print("=== Game Coordinate System ===\n")
 
     pos_0 = (0, 0, 0)

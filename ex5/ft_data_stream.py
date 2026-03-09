@@ -379,7 +379,7 @@ def prime_numbers() -> Generator[int, None, None]:
         yield prime
 
 
-def main():
+def main() -> None:
     print("=== Game Data Stream Processor ===")
 
     i = 1

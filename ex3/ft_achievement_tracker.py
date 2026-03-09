@@ -15,22 +15,22 @@ class Player:
     def get_id(self) -> int:
         return self.__id
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.__name
 
-    def get_achievements(self):
+    def get_achievements(self) -> set[str]:
         return self.__achievements
 
     def set_name(self, name: str) -> None:
         self.__name = name
 
-    def set_achievements(self, achievements: set[str]):
+    def set_achievements(self, achievements: set[str]) -> None:
         self.__achievements = achievements
 
-    def has_achievement(self, achievement: str):
+    def has_achievement(self, achievement: str) -> bool:
         return achievement in self.get_achievements()
 
-    def add_achievement(self, achievement: str):
+    def add_achievement(self, achievement: str) -> None:
         self.get_achievements().add(achievement)
 
 
@@ -56,7 +56,7 @@ class AchievementsManager:
         self.get_players().append(new_player)
         return new_player
 
-    def get_player(self, id: int):
+    def get_player(self, id: int) -> Player:
         for player in self.get_players():
             if (player.get_id() == id):
                 return player
@@ -112,7 +112,7 @@ class AchievementsManager:
         return player1.get_achievements() - player2.get_achievements()
 
 
-def give_achievements(player: Player, achievements: list[str]):
+def give_achievements(player: Player, achievements: list[str]) -> None:
     for achievement in achievements:
         if achievement not in player.get_achievements():
             player.get_achievements().add(achievement)
@@ -123,7 +123,7 @@ def give_achievements(player: Player, achievements: list[str]):
             )
 
 
-def main():
+def main() -> None:
     print("=== Achievement Tracker System ===\n")
 
     alices_achievements = [
