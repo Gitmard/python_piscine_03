@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import math
+import sys
 
 
 def parse_coordinates(string: str) -> tuple[int, int, int]:
@@ -9,7 +10,7 @@ def parse_coordinates(string: str) -> tuple[int, int, int]:
     for coordinate in string.split(","):
         parsed_coordinates.append(int(coordinate))
     if len(parsed_coordinates) < 3:
-        raise ValueError("Invalid coordinate string")
+        raise ValueError("Invalid coordinate string, expected: \"x,y,z\"")
     return (
         parsed_coordinates[0],
         parsed_coordinates[1],
@@ -35,8 +36,22 @@ def ft_round(n: float) -> float:
 def main() -> None:
     print("=== Game Coordinate System ===\n")
 
+    pos: tuple[int, int, int]
     pos_0 = (0, 0, 0)
-    pos = (10, 20, 5)
+    default_pos = (10, 20, 5)
+
+    if len(sys.argv) >= 2:
+        try:
+            pos = parse_coordinates(sys.argv[1])
+        except ValueError as value_error:
+            print(
+                "Error while parsing initial position coordinates,",
+                f"defaulting to {default_pos}",
+                f"\n{value_error}"
+            )
+            pos = default_pos
+    else:
+        pos = default_pos
     print(f"Position created: {pos}")
     print(
         f"Distance between {pos_0} and {pos}:",
