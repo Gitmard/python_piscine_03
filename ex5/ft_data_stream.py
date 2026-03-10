@@ -366,17 +366,38 @@ def event_data_stream() -> Generator[Event, None, None]:
 
 
 def fibonacci_generator() -> Generator[int, None, None]:
-    sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+    seq: list[int] = []
+    new_value: int
 
-    for value in sequence:
-        yield value
+    while True:
+        if len(seq) == 0:
+            seq.append(0)
+            yield 0
+        elif len(seq) == 1:
+            seq.append(1)
+            yield 1
+        else:
+            new_value = seq[len(seq) - 2] + seq[len(seq) - 1]
+            seq.append(new_value)
+            yield new_value
 
 
-def prime_numbers() -> Generator[int, None, None]:
-    primes = [2, 3, 5, 7, 11]
-
-    for prime in primes:
-        yield prime
+def prime_numbers_generator() -> Generator[int, None, None]:
+    i = 0
+    is_prime = False
+    while True:
+        for j in range(2, i):
+            if (
+                j != 1
+                and j != i
+                and i % j == 0
+            ):
+                is_prime = True
+                break
+        if is_prime:
+            is_prime = False
+            yield i
+        i += 1
 
 
 def main() -> None:
@@ -427,8 +448,12 @@ def main() -> None:
 
     print("\n=== Generator Demonstration ===")
     fibonacci_sequence: list[int] = []
-    for value in fibonacci_generator():
+    i = 0
+    for value in (fibonacci_generator()):
         fibonacci_sequence.append(value)
+        i += 1
+        if i == 10:
+            break
     fibonacci_sequence_str = ""
     fibonacci_sequence_len = len(fibonacci_sequence)
     for i in range(fibonacci_sequence_len):
@@ -439,9 +464,14 @@ def main() -> None:
         f"Fibonacci sequence (first {fibonacci_sequence_len}):",
         fibonacci_sequence_str
     )
+
     primes: list[int] = []
-    for value in prime_numbers():
+    i = 0
+    for value in prime_numbers_generator():
         primes.append(value)
+        i += 1
+        if i == 5:
+            break
     primes_str = ""
     primes_len = len(primes)
     for i in range(primes_len):
