@@ -275,13 +275,15 @@ def get_data() -> dict[Any, Any]:
     })
 
 
-def get_score_category(score) -> str:
+def get_score_category(score: int) -> str:
     return "high" if score >= 2000 else "medium" if score >= 1000 else "low"
 
 
 def main() -> None:
     data: dict[Any, Any] = get_data()
     print("=== Game Analytics Dashboard ===")
+
+    # LIST COMPREHENSION
 
     print("\n=== List Comprehension Examples ===")
 
@@ -314,6 +316,8 @@ def main() -> None:
     ))
     print(f"Active players: {active_players}")
 
+    # DICT COMPREHENSION
+
     print("\n=== Dict Comprehension Examples ===")
 
     player_scores = dict(
@@ -338,6 +342,8 @@ def main() -> None:
     }
     print(f"Achievement counts: {achievement_counts}")
 
+    # SET COMPREHENSION
+
     print("\n=== Set Comprehension Examples ===")
 
     unique_players = set(
@@ -360,6 +366,8 @@ def main() -> None:
         if not session.get("completed")
     )
     print(f"Active game modes: {active_game_modes}")
+
+    # COMBINED
 
     print("\n==== Combined Analysis ===")
     print(f"Total players: {len(players)}")
