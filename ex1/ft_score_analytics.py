@@ -19,9 +19,17 @@ def main() -> None:
         )
         return
     mapped: list[int] = []
+    parsed_score: int
     try:
         for param in sys.argv[1:]:
-            mapped.append(int(param))
+            parsed_score = int(param)
+            if parsed_score < 0:
+                print(
+                    "WARNING: You entered a negative score, some of the",
+                    "computed stats might not make sense. Did you mean to",
+                    f"input \"{param}\" ?"
+                )
+            mapped.append(parsed_score)
     except ValueError as value_error:
         print(f"A ValueError occured while mapping scores:\n{value_error}")
         return
